@@ -39,9 +39,7 @@
     "extends": [
       "plugin:vue/essential"
     ],
-    "parserOptions": {
-      "parser": "babel-eslint"
-    },
+    "parserOptions": {},
     "rules": {}
   },
   "browserslist": [
@@ -52,5 +50,4 @@
   "engines": {
     "node": "12.14.1"
   }
-
 }
