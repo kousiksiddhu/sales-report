@@ -1,36 +1,32 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import * as getters from './getters'
-import * as actions from './actions'
-import * as mutations from './mutations'
+import Vue from "vue";
+import Vuex from "vuex";
+import * as getters from "./getters";
+import * as actions from "./actions";
+import * as mutations from "./mutations";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 const state = {
   chartData: [],
   chartOptions: {},
-  selectedOption: {}
-}
+  selectedOption: {},
+};
 
 const store = new Vuex.Store({
   state,
   getters,
   actions,
-  mutations
-})
+  mutations,
+});
 
 if (module.hot) {
-  module.hot.accept([
-    './getters',
-    './actions',
-    './mutations'
-  ], () => {
+  module.hot.accept(["./getters", "./actions", "./mutations"], () => {
     store.hotUpdate({
-      getters: require('./getters'),
-      actions: require('./actions'),
-      mutations: require('./mutations')
-    })
-  })
+      getters: require("./getters"),
+      actions: require("./actions"),
+      mutations: require("./mutations"),
+    });
+  });
 }
 
-export default store
+export default store;

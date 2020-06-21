@@ -3,11 +3,7 @@
 <template>
   <section>
     <!-- Google chart plugin uses type, data and options attributes to generate chart. This will be dynamically passed from props. -->
-    <GChart
-      :type="chartType"
-      :data="chartData"
-      :options="chartOptions"
-    />
+    <GChart :type="chartType" :data="chartData" :options="chartOptions" />
   </section>
 </template>
 
@@ -15,9 +11,9 @@
 /**
  * Google chart npm package inclusion
  */
-import { GChart } from 'vue-google-charts';
-import { mapGetters } from 'vuex';
-import { AppConstants } from '../constants/app-constants.js';
+import { GChart } from "vue-google-charts";
+import { mapGetters } from "vuex";
+import { AppConstants } from "../constants/app-constants.js";
 
 /**
  * CONSTANTS
@@ -25,7 +21,7 @@ import { AppConstants } from '../constants/app-constants.js';
 const GOOGLE_CHART = AppConstants.GOOGLE_CHART;
 
 export default {
-  name: 'GoogleChart',
+  name: "GoogleChart",
   /**
    * Properties required to generate chart
    * chartType - Google chart type. Ex: LineChart, BarChart, PieChart
@@ -35,29 +31,34 @@ export default {
   props: {
     chartType: String,
     chartData: Array,
-    chartOptions: Object
+    chartOptions: Object,
   },
   components: {
-    GChart
+    GChart,
   },
   /**
    * Gets selected option
    */
-  computed: mapGetters(['selectedOption']),
+  computed: mapGetters(["selectedOption"]),
   /**
    * Watches for selectedOption value change and loads the chart on change
    */
   watch: {
-    selectedOption(currentState){
-      this.$store.dispatch('loadChart', { selectedMetric: currentState, defaultChartOptions: GOOGLE_CHART.chartOptions});
-    }
+    selectedOption(currentState) {
+      this.$store.dispatch("loadChart", {
+        selectedMetric: currentState,
+        defaultChartOptions: GOOGLE_CHART.chartOptions,
+      });
+    },
   },
   /**
    * Loads the chart on create
    */
-  created () {
-    this.$store.dispatch('loadChart', { selectedMetric: this.selectedOption, defaultChartOptions: GOOGLE_CHART.chartOptions});
-  }
-}
+  created() {
+    this.$store.dispatch("loadChart", {
+      selectedMetric: this.selectedOption,
+      defaultChartOptions: GOOGLE_CHART.chartOptions,
+    });
+  },
+};
 </script>
-

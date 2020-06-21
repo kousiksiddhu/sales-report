@@ -1,25 +1,22 @@
 <template>
   <div id="app">
     <!-- START: DropDown component - Charts gets dynamically constructed on value change -->
-    <DropDown
-      :selected="defaultMetricValue"
-      :options="metricTypes"
-    />
+    <DropDown :selected="defaultMetricValue" :options="metricTypes" />
     <!-- END: DropDown component -->
 
     <!-- START: GoogleChart component section - Generic chart component that can be reused across the site -->
-    <GoogleChart 
+    <GoogleChart
       :chartType="chartType"
       :chartData="chartData"
       :chartOptions="chartOptions"
     />
-    <GoogleChart 
+    <GoogleChart
       chartType="ColumnChart"
       :chartData="chartData"
       :chartOptions="chartOptions"
     />
-    <GoogleChart 
-      chartType="PieChart"
+    <GoogleChart
+      chartType="BarChart"
       :chartData="chartData"
       :chartOptions="chartOptions"
     />
@@ -28,9 +25,9 @@
 </template>
 
 <script>
-import GoogleChart from './components/GoogleChart.vue';
-import DropDown from './components/DropDown.vue';
-import { AppConstants } from './constants/app-constants.js';
+import GoogleChart from "./components/GoogleChart.vue";
+import DropDown from "./components/DropDown.vue";
+import { AppConstants } from "./constants/app-constants.js";
 import { mapGetters } from "vuex";
 
 /**
@@ -39,24 +36,24 @@ import { mapGetters } from "vuex";
 const GOOGLE_CHART = AppConstants.GOOGLE_CHART;
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     DropDown,
-    GoogleChart
+    GoogleChart,
   },
   /**
    * Gets chartData and chartOptions from the state
    */
-  computed: mapGetters(['chartData', 'chartOptions']),
-  data(){
+  computed: mapGetters(["chartData", "chartOptions"]),
+  data() {
     return {
       /**
        * Constant data values
        */
       defaultMetricValue: GOOGLE_CHART.defaultMetricValue,
       metricTypes: GOOGLE_CHART.metricTypes,
-      chartType: GOOGLE_CHART.chartType
-    }
-  }
-}
+      chartType: GOOGLE_CHART.chartType,
+    };
+  },
+};
 </script>
