@@ -1,28 +1,62 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- START: DropDown component - Charts gets dynamically constructed on value change -->
+    <DropDown
+      :selected="defaultMetricValue"
+      :options="metricTypes"
+    />
+    <!-- END: DropDown component -->
+
+    <!-- START: GoogleChart component section - Generic chart component that can be reused across the site -->
+    <GoogleChart 
+      :chartType="chartType"
+      :chartData="chartData"
+      :chartOptions="chartOptions"
+    />
+    <GoogleChart 
+      chartType="ColumnChart"
+      :chartData="chartData"
+      :chartOptions="chartOptions"
+    />
+    <GoogleChart 
+      chartType="PieChart"
+      :chartData="chartData"
+      :chartOptions="chartOptions"
+    />
+    <!-- END: GoogleChart component section - Generic chart component that can be reused across the site -->
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import GoogleChart from './components/GoogleChart.vue';
+import DropDown from './components/DropDown.vue';
+import { AppConstants } from './constants/app-constants.js';
+import { mapGetters } from "vuex";
+
+/**
+ * CONSTANTS
+ */
+const GOOGLE_CHART = AppConstants.GOOGLE_CHART;
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    DropDown,
+    GoogleChart
+  },
+  /**
+   * Gets chartData and chartOptions from the state
+   */
+  computed: mapGetters(['chartData', 'chartOptions']),
+  data(){
+    return {
+      /**
+       * Constant data values
+       */
+      defaultMetricValue: GOOGLE_CHART.defaultMetricValue,
+      metricTypes: GOOGLE_CHART.metricTypes,
+      chartType: GOOGLE_CHART.chartType
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
